@@ -1,5 +1,5 @@
 let origBoard;
-const huPlayer = '0';
+const huPlayer = 'O';
 const aiPlayer = 'X';
 const winCombos = [
     [0, 1, 2],
@@ -27,4 +27,9 @@ function startGame() {
 
 function turnClick(square) {
     turn(square.target.id, huPlayer)
+}
+
+function turn(squareId, player) {
+    origBoard[squareId] = player;
+    document.getElementById(squareId).innerText = player;
 }
