@@ -62,6 +62,31 @@ function gameOver(gameWon) {
     for (let i = 0; i < cells.length; i++) {
         cells[i].removeEventListener('click', turnClick, false)
     }
+    declareWinner(gameWon.player == huPlayer ? 'You win!' : 'You lose.')
+}
+
+function declareWinner(who) {
+    document.querySelector('.endGame').style.display = 'block';
+    document.querySelector('.endGame .text').innerText = who;
 }
 
 //make basic AI
+function emptySquares() {
+    return origBoard.filter(s => typeof s == 'number')
+}
+
+function bestSpot() {
+    return emptySquares()[0];
+}
+
+function checkTie() {
+    if (emptySquares().length == 0) {
+        for (let i=0; i < cells.length; i++) {
+            cells[i].style.backgroundColor = 'green';
+            cells[i].removeEventListener('click', turnClick, false);
+        }
+        declareWinner("Tie Game!")
+        return true;
+    }
+    return false;
+}
