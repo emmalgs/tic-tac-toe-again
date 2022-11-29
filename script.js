@@ -43,7 +43,7 @@ function checkWin(board, player) {
     let gameWon = null;
     for (let [index, win] of winCombos.entries()) {
         //has the player played in every spot that counts as a win
-        if (win.every(elem => plays.indexOf(elem > -1))) {
+        if (win.every(elem => plays.indexOf(elem) > -1)) {
             gameWon = {index: index, player: player};
             break;
         }
@@ -53,6 +53,12 @@ function checkWin(board, player) {
 
 function gameOver(gameWon) {
     for (let index of winCombos[gameWon.index]) {
-        
+        document.getElementById(index).style.backgroundColor =
+        gameWon.player == huPlayer ? 'blue' : 'red'
+    }
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].removeEventListener('click', turnClick, false)
     }
 }
+
+//make basic AI
